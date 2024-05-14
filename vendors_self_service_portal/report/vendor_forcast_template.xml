@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <template id="vendor_forcast_template">
+        <t t-call="web.html_container">
+            <div class="page">
+                <t t-foreach="docs" t-as="forcast">
+                    <t t-call="web.external_layout">
+                        <div class="page">
+                            <div class="oe_structure"/>
+                            <h2 class="mt-4">
+                                <span>Vendor Forcast For Product #</span>
+                                <span t-field="forcast.product_id.name"/>
+                            </h2>
+
+                            <div class="row mt-4 mb-4" id="forcast_informations">
+                                <div class="col-auto col-3 mw-100 mb-2" name="forcast_informations_reference">
+                                    <strong>Expected Quantity:</strong>
+                                    <p class="m-0" t-field="forcast.expected_quantity"/>
+                                </div>
+                                <div class="col-auto col-3 mw-100 mb-2" name="forcast_informations_date">
+                                    <strong>Forcast Date:</strong>
+                                    <p class="m-0" t-field="forcast.forecast_date" t-options='{"widget": "date"}'/>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </t>
+            </div>
+        </t>
+    </template>
+
+</odoo>

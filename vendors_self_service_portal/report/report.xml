@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="vendor_forcast_report" model="ir.actions.report">
+        <field name="name">Vendor Forcast</field>
+        <field name="model">vendor.forcast</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">vendors_self_service_portal.vendor_forcast_template</field>
+        <field name="report_file">vendors_self_service_portal.vendor_forcast_template</field>
+        <field name="print_report_name">'Print Vendor Forcast - %s' % (object.product_id.name).replace('/', '')</field>
+        <field name="binding_model_id" ref="model_vendor_forcast"/>
+        <field name="binding_type">report</field>
+    </record>
+
+</odoo>

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+
+        <record id="action_print_" model="ir.actions.server">
+            <field name="name">Print Forcast</field>
+            <field name="model_id" ref="vendors_self_service_portal.model_vendor_forcast"/>
+            <field name="binding_model_id" ref="vendors_self_service_portal.model_vendor_forcast"/>
+            <field name="binding_view_types">form</field>
+            <field name="state">code</field>
+            <field name="code">
+                action = record.action_report_forcast()
+            </field>
+        </record>
+<!--        <record id="unlink_task_type_action" model="ir.actions.server">-->
+<!--            <field name="name">Delete</field>-->
+<!--            <field name="model_id" ref="project.model_project_task_type"/>-->
+<!--            <field name="binding_model_id" ref="project.model_project_task_type"/>-->
+<!--            <field name="binding_view_types">form,list</field>-->
+<!--            <field name="state">code</field>-->
+<!--            <field name="code">action = records.unlink_wizard(stage_view=True)</field>-->
+<!--        </record>-->
+
+        <record id="vendor_forcast_form" model="ir.ui.view">
+            <field name="name">vendor.forcast.form</field>
+            <field name="model">vendor.forcast</field>
+            <field name="arch" type="xml">
+                <form string="Vendor Forcast" class="o_purchase_order">
+                    <header>
+                        <button name="action_report_forcast" type="object" string="Print Vendor Forcast"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="product_id" widget="res_partner_many2one"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="expected_quantity"/>
+                                <field name="forecast_date"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="vendor_forcast_list_view">
+            <field name="name">Vendor Forcast List</field>
+            <field name="model">vendor.forcast</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="product_id"/>
+                    <field name="expected_quantity"/>
+                    <field name="forecast_date"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="vendor_forcast_action_window">
+            <field name="name">Vendor Forcast</field>
+            <field name="res_model">vendor.forcast</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem name="Vendor Forcasts"
+                  id="vendor_forcast_menu"
+                  parent="vendors_self_service_portal.vendor_forcast_submenu"
+                  action="vendor_forcast_action_window"/>
+
+    </data>
+</odoo>

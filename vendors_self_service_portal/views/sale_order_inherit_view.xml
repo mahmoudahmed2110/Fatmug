@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+
+    <record id="view_sale_order_adjustment_requests_form" model="ir.ui.view">
+        <field name="name">sale.order.adjustments.requests.forms</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='other_information']" position="after">
+                <page string="Adjustments Requests" name="adjustments_requests">
+                    <field name="adjustments_request_ids" widget="section_and_note_one2many" mode="tree">
+                        <tree string="Adjustments Requests" editable="bottom">
+                            <control>
+                                <create name="add_adjustment_control" string="Add a adjustment request"/>
+                                <create name="add_section_control" string="Add a section" context="{'default_display_type': 'line_section'}"/>
+                                <create name="add_note_control" string="Add a note" context="{'default_display_type': 'line_note'}"/>
+                            </control>
+
+                            <field name="create_uid"/>
+                            <field name="adjustment_detail"/>
+                            <field name="comment"/>
+                        </tree>
+                    </field>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

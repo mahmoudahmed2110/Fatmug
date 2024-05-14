@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+
+    <record id="product_template_forcast_form_inherit" model="ir.ui.view">
+        <field name="name">product.template.forcast.form.inherit</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_only_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='general_information']" position="after">
+                <page string="Vendor Forcasts" name="vendors_forcasts">
+                    <field name="vendor_forcasts_ids" widget="section_and_note_one2many" mode="tree">
+                        <tree string="Vendors Forcasts" editable="bottom">
+                            <control>
+                                <create name="add_forecast_control" string="Add a vendor forcasts"/>
+                                <create name="add_section_control" string="Add a section" context="{'default_display_type': 'line_section'}"/>
+                                <create name="add_note_control" string="Add a note" context="{'default_display_type': 'line_note'}"/>
+                            </control>
+                            <field name="create_uid"/>
+                            <field name="expected_quantity"/>
+                            <field name="forecast_date"/>
+                        </tree>
+                    </field>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

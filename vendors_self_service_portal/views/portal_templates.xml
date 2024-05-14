@@ -1,0 +1,145 @@
+<odoo>
+    <data>
+        <template id="portal_my_home" inherit_id="portal.portal_my_home" name="My Portal">
+            <xpath expr="//div[hasclass('o_portal_docs')]" position="inside">
+                <t t-call="portal.portal_docs_entry">
+                    <t t-set="url">/my/forcasts</t>
+                    <t t-set="title">Vendors Forcasts</t>
+                    <t t-set="placeholder_count" t-value="'forcast_counts'"/>
+                </t>
+            </xpath>
+        </template>
+
+        <template id="portal_breadcrumbs" inherit_id="portal.portal_breadcrumbs">
+            <xpath expr="//ol[hasclass('o_portal_submenu')]" position="inside">
+                <li t-if="page_name == 'forcast_list_view'" class="breadcrumb-item"><span>Forcasts</span></li>
+                <li t-if="page_name == 'forcasts_form_view'" class="breadcrumb-item">
+                    <a href="/my/forcasts">Forcasts</a>
+                    /
+                    <span t-out="forcast.product_id.name"/>
+                </li>
+            </xpath>
+        </template>
+
+        <template id="vendors_forcasts_list_view_portal">
+            <t t-call="portal.portal_layout">
+                <t t-set="breadcrumbs_searchbar" t-value="True"/>
+                <t t-call="portal.portal_searchbar">
+                    <t t-set="title">Forcsats333</t>
+                </t>
+                <t t-call="portal.portal_table">
+                    <t t-foreach="group_forcasts" t-as="forcasts">
+                        <thead>
+                            <tr t-if="groupby in ('product_id')">
+                                <th class="text-center" colspan="1">
+                                    <th class="text-center" t-if="groupby == 'product_id'">
+                                        <h5>Product:
+                                            <em class="font-weight-normal text-muted"
+                                                t-out="forcasts['product_id'].name"/>
+                                            (<t t-out="len(forcasts['forcasts'])"/>)
+                                        </h5>
+                                    </th>
+                                </th>
+                            </tr>
+                            <tr class="active">
+                                <th class="text-center">ID</th>
+                                <th class="text-center" t-if="groupby != 'product_id'">Product</th>
+                                <th class="text-center">Expected Quantity</th>
+                                <th class="text-center">Forcast Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-foreach="forcasts['forcasts']" t-as="forcast">
+                                <tr>
+                                    <td class="text-center">
+                                        <t t-out="forcast.id"/>
+                                    </td>
+                                    <td class="text-center" t-if="groupby != 'product_id'">
+                                        <a t-attf-href="/my/forcast/#{forcast.id}">
+                                            <t t-out="forcast.product_id.name"/>
+                                        </a>
+                                    </td>
+                                    <td class="text-center">
+                                        <t t-out="forcast.expected_quantity"/>
+                                    </td>
+                                    <td class="text-center">
+                                        <t t-out="forcast.forecast_date"/>
+                                    </td>
+                                </tr>
+                            </t>
+                        </tbody>
+                    </t>
+                </t>
+            </t>
+        </template>
+
+        <template id="vendor_forcast_form_view_portal" inherit_id="portal.portal_sidebar">
+            <xpath expr="//div[hasclass('o_portal_sidebar')]" position="inside">
+                <t t-if="page_name == 'forcasts_form_view'">
+                    <section style="background-color: #eee;">
+                        <div class="container py-5">
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <div class="card mb-4">
+                                        <div class="card-body text-center">
+                                            <a t-attf-href="/my/forcast/print/{{forcast.id}}" class="fa fa-download">
+                                                Download
+                                            </a>
+                                            <h5 class="my-3">
+                                                <t t-out="forcast.product_id.name"/>
+                                            </h5>
+                                            <p class="text-muted mb-1">
+                                                <t t-out="forcast.expected_quantity"/>
+                                            </p>
+                                            <p class="text-muted mb-1">
+                                                <t t-out="forcast.forecast_date"/>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-8">
+                                    <div class="card mb-4">
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-sm-3">
+                                                    <p class="mb-0">Forcast for Product</p>
+                                                </div>
+                                                <div class="col-sm-9">
+                                                    <p class="text-muted mb-0">
+                                                        <t t-out="forcast.product_id.name"/>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <hr/>
+                                            <div class="row">
+                                                <div class="col-sm-3">
+                                                    <p class="mb-0">Expected Quantity</p>
+                                                </div>
+                                                <div class="col-sm-9">
+                                                    <p class="text-muted mb-0">
+                                                        <t t-out="forcast.expected_quantity"/>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <hr/>
+                                            <div class="row">
+                                                <div class="col-sm-3">
+                                                    <p class="mb-0">Forcast Date</p>
+                                                </div>
+                                                <div class="col-sm-9">
+                                                    <p class="text-muted mb-0">
+                                                        <t t-out="forcast.forecast_date"/>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </t>
+            </xpath>
+        </template>
+    </data>
+</odoo>

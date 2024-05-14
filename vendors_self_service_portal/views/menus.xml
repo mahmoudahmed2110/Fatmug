@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <!-- Top menu item -->
+        <menuitem name="Vendor Self-Service Portal" id="vendors_self_service_portal.menu_root"/>
+
+        <!-- menu categories -->
+
+        <menuitem name="Vendor Forcast"
+                  sequence="0"
+                  id="vendor_forcast_submenu"
+                  parent="vendors_self_service_portal.menu_root"/>
+        <menuitem name="Vendor Adjustment" id="vendor_adjustment_request_submenu"
+                  sequence="1"
+                  parent="vendors_self_service_portal.menu_root"/>
+
+    </data>
+</odoo>

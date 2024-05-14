@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="vendor_email_template" model="mail.template">
+        <field name="name">Vendor Adjustment Request</field>
+        <field name="model_id" ref="vendors_self_service_portal.model_vendor_adjustment_request" />
+        <field name="subject">Vendor Adjustment Request Notification</field>
+        <field name="email_from">{{ (object.create_uid.email_formatted or '')}}</field>
+        <field name="email_to">{{ object.team_email or ''}}</field>
+        <field name="partner_to">{{ object.write_uid.partner_id.id or False}}</field>
+        <field name="report_name">Vendor_Adjustment_{{ object.name }}_Request</field>
+        <field name="lang">{{ object.create_uid.lang }}</field>
+        <field name="body_html" type="html">
+            <p>Dear Team,</p>
+            <p>Vendor Adjustment Email,</p>
+            <t t-if="object.order_id">
+                <p> Order<span t-field="object.order_id.name"/> </p>
+            </t>
+            <t t-else="">
+                <p>Order is not available.</p>
+            </t>
+            <t t-if="object.adjustment_detail">
+                <p> Adjustment Detail<span t-field="object.adjustment_detail"/> </p>
+            </t>
+            <t t-else="">
+                <p>Adjustment Detail is not available.</p>
+            </t>
+            <t t-if="object.comment">
+                <p>Comment<span t-field="object.comment"/> </p>
+            </t>
+            <t t-else="">
+                <p>Comment is not available.</p>
+            </t>
+            <p>This is vendor email you <rece></rece>ived for orders adjustments.</p>
+            <p>Thank you,</p>
+        </field>
+    </record>
+
+    <record id="vendor_email_template_wizard" model="mail.template">
+        <field name="name">Vendor Adjustment Request Wizard</field>
+        <field name="model_id" ref="vendors_self_service_portal.model_adjustment_request_wizard" />
+        <field name="subject">Vendor Adjustment Request Notification</field>
+        <field name="email_from">{{ (object.create_uid.email_formatted or '')}}</field>
+        <field name="email_to">{{ object.team_email or ''}}</field>
+        <field name="partner_to">{{ object.write_uid.partner_id.id or False}}</field>
+        <field name="report_name">Vendor_Adjustment_{{ object.name }}_Request</field>
+        <field name="lang">{{ object.create_uid.lang }}</field>
+        <field name="body_html" type="html">
+            <p>Dear Team,</p>
+            <p>Vendor Adjustment Email,</p>
+            <t t-if="object.order_id">
+                <p> Order<span t-field="object.order_id.name"/> </p>
+            </t>
+            <t t-else="">
+                <p>Order is not available.</p>
+            </t>
+            <t t-if="object.adjustment_detail">
+                <p> Adjustment Detail<span t-field="object.adjustment_detail"/> </p>
+            </t>
+            <t t-else="">
+                <p>Adjustment Detail is not available.</p>
+            </t>
+            <t t-if="object.comment">
+                <p>Comment<span t-field="object.comment"/> </p>
+            </t>
+            <t t-else="">
+                <p>Comment is not available.</p>
+            </t>
+            <p>This is vendor email you <rece></rece>ived for orders adjustments.</p>
+            <p>Thank you,</p>
+        </field>
+
+    </record>
+
+</odoo>

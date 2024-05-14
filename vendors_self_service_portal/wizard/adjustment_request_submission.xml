@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <!--form_view for adjustment_request_submission-->
+        <record id="adjustment_request_submission_form" model="ir.ui.view">
+            <field name="name">adjustment.request.wizard.form</field>
+            <field name="model">adjustment.request.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Adjustment Request Submission" class="o_purchase_order">
+                    <group>
+                        <group>
+                            <field name="order_id" widget="res_partner_many2one"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="adjustment_detail"/>
+                            <field name="comment"/>
+                            <field name="team_email" invisible="1"/>
+                        </group>
+                    </group>
+                    <footer>
+                        <button name="submit_adjustment_request" string="Submit Adjustment" type="object"
+                                class="btn-primary" data-hotkey="s"/>
+                        <button special="cancel" string="Discard" class="btn-secondary" data-hotkey="z"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <!-- action window for adjustment_request_submission-->
+        <record model="ir.actions.act_window" id="adjustment_request_wizard_action_window">
+            <field name="name">adjustment_request_wizard</field>
+            <field name="res_model">adjustment.request.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+        <menuitem name="Vendor Adjustment Submission" id="vendor_adjustment_request_submission"
+                  sequence="2"
+                  parent="vendors_self_service_portal.menu_root"
+                  action="adjustment_request_wizard_action_window"
+        />
+
+    </data>
+</odoo>
